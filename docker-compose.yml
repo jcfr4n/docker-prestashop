@@ -1,25 +1,41 @@
-version: "3"
+version: '3.7'
 services:
     PS:
         image: prestashop/prestashop
-        environment:
-            - _PS_ADMIN_DIR_=/var/www/html/admin
         volumes:
             - ./data:/var/www/html
         ports:
             - "8099:80"
         restart: always
+        env_file: .env
+        environment:
+            - DB_SERVER=$DB:8306
+            - DB_USER=$MYSQL_USER
+            - DB_PASSWD=$MYSQL_PASSWORD
+            - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+            - DB_NAME=$NOMBRE_PROYECTO
+            - DB_PREFIX=$PREFIJO
+            - PS_LANGUAGE='es'
+            - PS_COUNTRY='ES'
+            - PS_FOLDER_ADMIN='admin1234'
+            - PS_FOLDER_INSTALL='install__'
+            - ADMIN_MAIL='hola@hola.com'
+            - ADMIN_PASSWD='asdf1234'
+        networks:
+            - app-network
     DB:
         image: mysql:5.7
-        restart: always
-        environment:
-            - MYSQL_DATABASE=exampledb
-            - MYSQL_USER=userps
-            - MYSQL_PASSWORD=passps
-            - MYSQL_ROOT_PASSWORD=12345
         volumes:
             - ./db:/var/lib/mysql
         ports:
             - "8306:3306"
-
+        restart: always
+        env_file: .env
+        environment:
+            - MYSQL_DATABASE=${NOMBRE_PROYECTO}
+        networks:
+            - app-network
+    networks:
+        app-network:
+            driver: bridge
 
