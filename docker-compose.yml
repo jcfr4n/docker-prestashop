@@ -16,13 +16,7 @@ services:
             - DB_NAME=$NOMBRE_PROYECTO
             - DB_PREFIX=$PREFIJO
             - PS_LANGUAGE='es'
-            - PS_COUNTRY='ES'
-            - PS_FOLDER_ADMIN='admin1234'
-            - PS_FOLDER_INSTALL='install__'
-            - ADMIN_MAIL='hola@hola.com'
-            - ADMIN_PASSWD='asdf1234'
-        networks:
-            - app-network
+            - PS_COUNTRY='ES
     DB:
         image: mysql:5.7
         volumes:
@@ -33,9 +27,4 @@ services:
         env_file: .env
         environment:
             - MYSQL_DATABASE=${NOMBRE_PROYECTO}
-        networks:
-            - app-network
-    networks:
-        app-network:
-            driver: bridge
 
