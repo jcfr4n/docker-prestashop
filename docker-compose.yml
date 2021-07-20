@@ -6,7 +6,7 @@ services:
             - ./data:/var/www/html
         ports:
             - "8099:80"
-        restart: always
+        restart: on-failure
         env_file: .env
         environment:
             - DB_SERVER=$DB:8306
@@ -23,7 +23,7 @@ services:
             - ./db:/var/lib/mysql
         ports:
             - "8306:3306"
-        restart: always
+        restart: on-failure
         env_file: .env
         environment:
             - MYSQL_DATABASE=${NOMBRE_PROYECTO}
