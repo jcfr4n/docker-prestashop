@@ -2,6 +2,7 @@ version: '3.7'
 services:
     PS:
         image: prestashop/prestashop
+        container_name: ${NOMBRE_PROYECTO}_ps
         volumes:
             - ./data:/var/www/html
         ports:
@@ -19,6 +20,7 @@ services:
             - PS_COUNTRY='ES
     DB:
         image: mysql:5.7
+        container_name: ${NOMBRE_PROYECTO}_db
         volumes:
             - ./db:/var/lib/mysql
         ports:
