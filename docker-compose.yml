@@ -1,7 +1,7 @@
 version: '3.7'
 services:
     PS:
-        image: prestashop/prestashop
+        image: prestashop/prestashop:1.7-7.3
         container_name: ${NOMBRE_PROYECTO}_ps
         volumes:
             - ./data:/var/www/html
